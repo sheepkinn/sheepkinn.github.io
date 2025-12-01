@@ -1,0 +1,289 @@
+/* =========================================
+   1. 基础设置 & 全局变量
+========================================= */
+:root {
+  --bg-color-initial: #ffffff;
+  --bg-color-final: #000000;
+  --text-color-white: #ffffff;
+  --text-color-black: #000000;
+
+  --t-transition: 0.8s;
+  --t-text-move: 1.2s;
+  --t-curtain: 0.8s;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--bg-color-initial);
+  font-family: 'Montserrat', sans-serif, Arial;
+}
+#intro-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+}
+
+/* Header */
+.header-bar {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  width: 100%;
+  padding: 0 2%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 50;
+}
+.top-icon {
+  width: 50px;
+  height: auto;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all var(--t-transition) ease-in-out;
+}
+
+/* =======================================================
+   2. 核心交互：Menu 按钮 (修复遮罩缝隙版)
+======================================================= */
+.top-menu {
+  font-weight: 650;
+  font-size: 1.2rem;
+  color: var(--text-color-black);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(20px);
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  transition: color var(--t-transition) ease-in-out, opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* --- A. 括号内部 (CLOSE) --- */
+.inner-mask {
+  position: relative;
+  height: 1.5em;
+  overflow: hidden;
+
+  /* 初始状态：很窄，模拟空格 */
+  width: 10px;
+
+  transition: width 1.2s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.text-close {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-top: -0.5em;
+  width: 65px;
+  text-align: center;
+
+  /* 修复重点：初始完全透明，并且移得更远 */
+  transform: translateX(-120%);
+  opacity: 0;
+
+  transition: transform 1.2s cubic-bezier(0.76, 0, 0.24, 1), opacity 0.2s ease-in;
+}
+
+/* --- B. 右括号 --- */
+.bracket-right {
+  display: inline-block;
+  transition: transform 1.2s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+/* --- C. 括号外部 (MENU) --- */
+.outer-mask {
+  position: relative;
+  height: 1.5em;
+  overflow: hidden;
+  width: 60px;
+  margin-left: 8px;
+  transition: width 1.2s cubic-bezier(0.76, 0, 0.24, 1), margin 0.6s ease;
+}
+
+.text-menu {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-top: -0.5em;
+  width: 60px;
+  text-align: left;
+
+  transform: translateX(0%);
+  opacity: 1;
+  transition: transform 0.6s cubic-bezier(0.76, 0, 0.24, 1), opacity 0.3s ease-in;
+}
+
+/* =======================================================
+   3. 点击后的变化 (Menu Open)
+======================================================= */
+
+/* 1. 内部变宽 -> CLOSE 出现 */
+body.menu-open .inner-mask {
+  width: 65px;
+}
+body.menu-open .text-close {
+  transform: translateX(0%);
+  /* 修复重点：打开时变不透明 */
+  opacity: 1;
+  transition: transform 0.6s cubic-bezier(0.76, 0, 0.24, 1), opacity 0.3s ease-out 0.1s;
+}
+
+/* 2. 外部变窄 -> MENU 消失 */
+body.menu-open .outer-mask {
+  width: 0px;
+  margin-left: 0px;
+}
+body.menu-open .text-menu {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+/* =======================================================
+   4. 其他页面元素 (保持原样)
+======================================================= */
+.text-wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  padding: 0 10px;
+  box-sizing: border-box;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.retour-text {
+  font-size: 18vw;
+  font-weight: 400;
+  letter-spacing: -2px;
+  margin: 0;
+  color: var(--text-color-black);
+  white-space: nowrap;
+  transform: translateY(100%);
+  transition: color var(--t-transition) ease-in-out, transform var(--t-text-move) cubic-bezier(0.65, 0, 0.35, 1);
+  will-change: transform, color;
+}
+
+.fullscreen-nav {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  transform: translateY(-40%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 20;
+  pointer-events: none;
+}
+.nav-item {
+  font-size: 4vw;
+  font-weight: 700;
+  color: var(--text-color-black);
+  text-decoration: none;
+  margin: 10px 0;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s ease-in, transform 0.8s ease-in;
+}
+
+.black-curtain {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background-color: var(--bg-color-final);
+  z-index: 1;
+  transition: height 0.8s cubic-bezier(0.65, 0, 0.35, 1), opacity var(--t-transition) ease-in-out;
+}
+
+/* Stages */
+body.stage-1 .top-icon {
+  opacity: 1;
+  transform: scale(1);
+}
+body.stage-1 .top-menu {
+  opacity: 1;
+  transform: translateY(0);
+}
+body.stage-2 .retour-text {
+  transform: translateY(15%);
+}
+body.stage-3 .black-curtain {
+  height: 100%;
+}
+body.stage-3 .text-wrapper {
+  top: 0;
+  height: 100%;
+}
+body.stage-3 .retour-text {
+  color: var(--text-color-white);
+  transform: translateY(calc(-100vh + 80% + 120px));
+}
+body.stage-3 .top-icon {
+  filter: invert(1);
+}
+body.stage-3 .top-menu {
+  color: var(--text-color-white);
+}
+
+/* Menu Open States */
+body.menu-open .black-curtain {
+  opacity: 0;
+}
+body.menu-open .retour-text {
+  transform: translateY(-150vh);
+  opacity: 0;
+  transition: transform 0.8s ease-in, opacity 0.8s ease-in;
+}
+body.menu-open .top-icon {
+  filter: invert(0);
+}
+body.menu-open .top-menu {
+  color: var(--text-color-black);
+}
+
+body.menu-open .fullscreen-nav {
+  pointer-events: auto;
+}
+body.menu-open .nav-item {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 1.2s ease-out, transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+body.menu-open .nav-item:nth-child(3) {
+  transition-delay: 0s;
+}
+body.menu-open .nav-item:nth-child(2) {
+  transition-delay: 0.2s;
+}
+body.menu-open .nav-item:nth-child(1) {
+  transition-delay: 0.4s;
+}
+.nav-item:nth-child(1) {
+  transition-delay: 0s;
+}
+.nav-item:nth-child(2) {
+  transition-delay: 0.2s;
+}
+.nav-item:nth-child(3) {
+  transition-delay: 0.4s;
+}
