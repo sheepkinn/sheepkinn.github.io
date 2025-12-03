@@ -287,3 +287,40 @@ body.menu-open .nav-item:nth-child(1) {
 .nav-item:nth-child(3) {
   transition-delay: 0.4s;
 }
+
+.read-more {
+  display: inline-block; /* 让它可以设置宽高和边距 */
+  margin-top: 15px; /* 与上方文字拉开距离 */
+  padding: 10px 20px; /* 内边距：上下10px，左右20px */
+
+  background-color: #000000; /* 黑色背景 */
+  color: #ffffff; /* 白色文字 */
+
+  font-size: 0.9rem; /* 字体稍小一点 */
+  font-weight: 700; /* 粗体 */
+  text-decoration: none; /* 去掉下划线 */
+
+  /* 添加一点过渡效果，让鼠标放上去变色时更丝滑 */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* 鼠标悬停时的效果 */
+.read-more:hover {
+  background-color: #333333; /* 变成深灰色 */
+  transform: translateY(-2px); /* 微微上浮，更有交互感 */
+}
+
+.post-meta {
+  /* 1. 变小 */
+  font-size: 0.85rem; /* 0.85rem 比默认的 1rem 小一些 */
+
+  /* 2. 变斜体 */
+  font-style: italic; /* 关键属性 */
+
+  /* 建议添加：颜色变灰 */
+  /* 这样能和正文区分开，看起来更有层次感 */
+  color: #666666;
+
+  /* 建议添加：底部间距 */
+  margin-bottom: 15px;
+}

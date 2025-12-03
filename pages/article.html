@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>加载中... - RETOUR</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+
+  <style>
+    /* 文章页专用样式 */
+    body {
+      background-color: #fff;
+      overflow-y: scroll;
+    }
+
+    .article-container {
+      max-width: 800px;
+      margin: 120px auto 100px;
+      padding: 0 20px;
+    }
+
+    /* 这是 Markdown 转换后的 HTML 的样式 */
+    #markdown-content {
+      line-height: 1.8;
+      color: #333;
+      font-family: -apple-system, sans-serif;
+    }
+
+    /* 针对 Markdown 元素的样式美化 */
+    #markdown-content h1 {
+      font-family: 'Montserrat';
+      font-weight: 900;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    #markdown-content h2 {
+      font-weight: 700;
+      margin-top: 40px;
+      margin-bottom: 15px;
+    }
+
+    #markdown-content p {
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+    }
+
+    #markdown-content blockquote {
+      border-left: 4px solid #000;
+      padding-left: 20px;
+      color: #666;
+      font-style: italic;
+    }
+
+    #markdown-content img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 20px 0;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 50px;
+      color: #000;
+      font-weight: 700;
+      text-decoration: none;
+      border-bottom: 2px solid #000;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="header-bar" style="position: absolute;">
+    <a href="../index.html"><img src="../assets/images/profile.png" alt="Icon" class="top-icon"
+        style="opacity: 1; transform: scale(1);"></a>
+  </header>
+
+  <article class="article-container">
+    <div id="markdown-content">
+      正在加载文章...
+    </div>
+
+    <a href="blog.html" class="back-link">← 返回博客列表</a>
+  </article>
+
+  <script>
+    // === 核心逻辑：读取 Markdown 并显示 ===
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // 1. 获取 URL 中的参数，例如: article.html?post=my-first-post
+      const urlParams = new URLSearchParams(window.location.search);
+      const postName = urlParams.get('post'); // 拿到 "my-first-post"
+
+      if (!postName) {
+        document.getElementById('markdown-content').innerHTML = "<h1>❌ 错误：未指定文章文件。</h1>";
+        return;
+      }
+
+      // 2. 拼接 Markdown 文件的路径
+      // 注意：因为 article.html 在 pages/ 里，所以要返回上一级找 assets
+      const mdFile = `../assets/posts/${postName}.md`;
+
+      // 3. 使用 fetch 去读取那个文件
+      fetch(mdFile)
+        .then(response => {
+          if (!response.ok) throw new Error("文章未找到");
+          return response.text(); // 把文件内容当做纯文本读出来
+        })
+        .then(markdownText => {
+          // 4. 使用 marked 库把 Markdown 文本转换成 HTML
+          const htmlContent = marked.parse(markdownText);
+
+          // 5. 塞到页面里
+          document.getElementById('markdown-content').innerHTML = htmlContent;
+
+          // 6. 让 Mermaid 寻找并渲染图表
+          // 只有等上面 innerHTML 执行完，页面里有了内容，Mermaid 才能找到它
+          mermaid.init(undefined, document.querySelectorAll('.language-mermaid'));
+
+          // (可选) 尝试提取第一行作为网页标题
+          const firstLine = markdownText.split('\n')[0].replace('# ', '');
+          document.title = firstLine + " - RETOUR";
+        })
+        .catch(error => {
+          document.getElementById('markdown-content').innerHTML = `<h1>❌ 加载失败</h1><p>请确保您是通过本地服务器 (Live Server) 访问的，而不是直接双击 HTML 文件。<br>错误信息: ${error.message}</p>`;
+        });
+    });
+
+
+  </script>
+</body>
+
+</html>
