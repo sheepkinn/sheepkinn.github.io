@@ -9,8 +9,22 @@
     rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/style.css">
 
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
 
   <style>
     /* 文章页专用样式 */
@@ -95,9 +109,24 @@
     // === 核心逻辑：读取 Markdown 并显示 ===
     document.addEventListener('DOMContentLoaded', () => {
 
+      // --- 辅助函数：将 Hex 颜色转为 RGBA (用于生成半透明背景) ---
+      function hexToRgba(hex, alpha) {
+        let c;
+        if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
+          c = hex.substring(1).split('');
+          if (c.length == 3) {
+            c = [c[0], c[0], c[1], c[1], c[2], c[2]];
+          }
+          c = '0x' + c.join('');
+          return 'rgba(' + [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(',') + ',' + alpha + ')';
+        }
+        return hex; // 如果不是 Hex，原样返回
+      }
+
       // 1. 获取 URL 中的参数，例如: article.html?post=my-first-post
       const urlParams = new URLSearchParams(window.location.search);
       const postName = urlParams.get('post'); // 拿到 "my-first-post"
+      const contentDiv = document.getElementById('markdown-content');
 
       if (!postName) {
         document.getElementById('markdown-content').innerHTML = "<h1>❌ 错误：未指定文章文件。</h1>";
@@ -108,27 +137,219 @@
       // 注意：因为 article.html 在 pages/ 里，所以要返回上一级找 assets
       const mdFile = `../assets/posts/${postName}.md`;
 
+
       // 3. 使用 fetch 去读取那个文件
       fetch(mdFile)
         .then(response => {
           if (!response.ok) throw new Error("文章未找到");
           return response.text(); // 把文件内容当做纯文本读出来
         })
+        // ... 之前的 fetch 代码 ...
+        // ... 前面的 marked.parse 和 innerHTML 逻辑 ...
+
         .then(markdownText => {
-          // 4. 使用 marked 库把 Markdown 文本转换成 HTML
-          const htmlContent = marked.parse(markdownText);
 
-          // 5. 塞到页面里
-          document.getElementById('markdown-content').innerHTML = htmlContent;
+          contentDiv.innerHTML = marked.parse(markdownText);
 
-          // 6. 让 Mermaid 寻找并渲染图表
-          // 只有等上面 innerHTML 执行完，页面里有了内容，Mermaid 才能找到它
-          mermaid.init(undefined, document.querySelectorAll('.language-mermaid'));
+          // ====================================================
+          // 🛠️ 修复 1: 处理 Mermaid 图表 (防止 Syntax Error)
+          // ====================================================
+          contentDiv.querySelectorAll('pre code.language-mermaid').forEach(code => {
+            const pre = code.parentElement;
+            const div = document.createElement('div');
+            div.className = 'mermaid';
+            div.textContent = code.textContent; // 自动修复转义字符
+            pre.replaceWith(div);
+          });
 
-          // (可选) 尝试提取第一行作为网页标题
-          const firstLine = markdownText.split('\n')[0].replace('# ', '');
-          document.title = firstLine + " - RETOUR";
+          // ====================================================
+          // 🎨 2. 提示块：支持 Markdown 内联自定义颜色
+          // 语法： > [!TYPE|#COLOR|ICON] Title
+          // ====================================================
+          contentDiv.querySelectorAll('blockquote').forEach(bq => {
+            const firstP = bq.querySelector('p');
+            if (!firstP) return;
+
+            const fullText = firstP.textContent;
+
+            // 正则解释：
+            // Group 1: 类型 (如 NOTE)
+            // Group 2 (可选): 颜色 (如 #ff0000)
+            // Group 3 (可选): 图标 (如 🚀)
+            // Group 4: 标题内容
+            const match = fullText.match(/^\[!([a-zA-Z0-9_-]+)(?:\|(#[0-9a-fA-F]{3,6}))?(?:\|(.+?))?\]\s*(.*)/);
+
+            if (match) {
+              const type = match[1].toLowerCase();
+              const customColor = match[2]; // 获取自定义颜色
+              const customIcon = match[3];  // 获取自定义图标
+              const title = match[4] || type.toUpperCase();
+
+              // 创建容器
+              const adDiv = document.createElement('div');
+              adDiv.className = `admonition admonition-${type}`;
+
+              // --- 🎨 核心：如果有自定义颜色，直接上色 ---
+              if (customColor) {
+                // 左边框颜色 = 原色
+                adDiv.style.borderLeftColor = customColor;
+                // 背景色 = 极淡的原色 (5% 不透明度)
+                adDiv.style.backgroundColor = hexToRgba(customColor, 0.05);
+              }
+
+              // 标题栏
+              const titleDiv = document.createElement('div');
+              titleDiv.className = 'admonition-title';
+
+              // --- 🎨 核心：如果有自定义颜色，标题栏也上色 ---
+              if (customColor) {
+                titleDiv.style.color = customColor; // 文字颜色
+                titleDiv.style.backgroundColor = hexToRgba(customColor, 0.15); // 背景浅色
+              }
+
+              // 图标逻辑：优先用 Markdown 里写的图标，如果没有则留空 (CSS 会处理默认图标)
+              let iconHtml = '<span class="admonition-icon"></span>';
+              if (customIcon) {
+                // 如果用户写了图标，直接覆盖
+                iconHtml = `<span class="admonition-icon" style="margin-right:8px;">${customIcon}</span>`;
+                // 顺便把 CSS 默认的伪元素图标隐藏掉
+                const style = document.createElement('style');
+                style.innerHTML = `.admonition-${type} .admonition-icon::before { content: none !important; }`;
+                adDiv.appendChild(style);
+              }
+
+              titleDiv.innerHTML = `${iconHtml}${title}`;
+
+              // 内容处理 (去重)
+              const contentDiv = document.createElement('div');
+              contentDiv.className = 'admonition-content';
+              contentDiv.innerHTML = bq.innerHTML;
+
+              const cleanP = contentDiv.querySelector('p');
+              if (cleanP) {
+                // 移除标记文字
+                cleanP.textContent = cleanP.textContent.replace(/^\[!.*?\]\s*.*(\r\n|\n|\r)?/, '');
+                if (!cleanP.textContent.trim()) cleanP.remove();
+              }
+
+              adDiv.appendChild(titleDiv);
+              adDiv.appendChild(contentDiv);
+              bq.replaceWith(adDiv);
+            }
+          });
+          // ====================================================
+          // 🦓 修复 3: 普通代码块美化 (顶部标题 + 斑马纹支持)
+          // ====================================================
+          contentDiv.querySelectorAll('pre code').forEach(code => {
+            // 此时 Mermaid 已经被上面处理掉了，剩下的都是普通代码
+            const pre = code.parentElement;
+
+            // 提取语言名称 (如 "JAVA")
+            let lang = "TEXT";
+            if (code.className && code.className.includes('language-')) {
+              lang = code.className.replace('language-', '').toUpperCase();
+            }
+            pre.setAttribute('data-language', lang);
+
+            // 确保 Prism 高亮
+            if (code.className) pre.className = code.className;
+          });
+
+          // ===============================================
+          // 📋 复制功能增强脚本 (Copy Logic)
+          // ===============================================
+
+          // --- 1. 处理代码块 (Block Code) ---
+          const pres = contentDiv.querySelectorAll('pre');
+          pres.forEach(pre => {
+            // 跳过 Mermaid 图表
+            if (pre.classList.contains('mermaid') || pre.parentElement.classList.contains('mermaid')) return;
+
+            // 创建复制按钮容器
+            const copyBtn = document.createElement('button');
+            copyBtn.className = 'copy-code-btn';
+            copyBtn.innerHTML = '📋'; // 你也可以换成 SVG 图标
+            copyBtn.setAttribute('aria-label', '复制代码');
+
+            // 绑定点击复制事件
+            copyBtn.addEventListener('click', () => {
+              // 获取代码文本 (去掉多余的换行)
+              const code = pre.querySelector('code').innerText;
+
+              navigator.clipboard.writeText(code).then(() => {
+                // 复制成功的反馈
+                const originalText = copyBtn.innerHTML;
+                copyBtn.innerHTML = '✅'; // 变成对勾
+                copyBtn.classList.add('copied');
+
+                // 2秒后变回原样
+                setTimeout(() => {
+                  copyBtn.innerHTML = originalText;
+                  copyBtn.classList.remove('copied');
+                }, 2000);
+              }).catch(err => {
+                console.error('复制失败:', err);
+                copyBtn.innerHTML = '❌';
+              });
+            });
+
+            // 将按钮添加到 pre 中
+            pre.appendChild(copyBtn);
+          });
+
+          // --- 2. 处理行内代码 (Inline Code) ---
+          const inlineCodes = contentDiv.querySelectorAll(':not(pre) > code');
+          inlineCodes.forEach(code => {
+            // 只有当代码内容不为空时才绑定
+            if (!code.innerText.trim()) return;
+
+            code.style.cursor = 'copy'; // 鼠标变成复制手势
+            code.title = '点击复制';   // 鼠标悬停提示
+
+            code.addEventListener('click', (e) => {
+              const text = code.innerText;
+              navigator.clipboard.writeText(text).then(() => {
+                // 创建一个临时的“已复制”提示框跟随鼠标
+                showTooltip(e.pageX, e.pageY, '已复制!');
+              });
+            });
+          });
+
+          // --- 辅助函数：显示行内代码的提示框 ---
+          function showTooltip(x, y, msg) {
+            const tooltip = document.createElement('div');
+            tooltip.className = 'copy-tooltip';
+            tooltip.innerText = msg;
+            document.body.appendChild(tooltip);
+
+            // 定位
+            tooltip.style.left = x + 'px';
+            tooltip.style.top = (y - 30) + 'px';
+
+            // 动画消失
+            setTimeout(() => {
+              tooltip.style.opacity = '0';
+              tooltip.style.transform = 'translateY(-10px)';
+            }, 1000);
+            setTimeout(() => tooltip.remove(), 1500);
+          }
+
+
+          // ===============================================
+          // 🚀 启动渲染
+          // ===============================================
+
+          // 1. 渲染 Mermaid (注意：现在它寻找的是 .mermaid 类)
+          mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+          // ====================================================
+          // 🚀 启动渲染
+          // ====================================================
+          if (typeof mermaid !== 'undefined') mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+          if (typeof Prism !== 'undefined') Prism.highlightAllUnder(contentDiv);
+
+          document.title = (markdownText.split('\n')[0].replace('# ', '') || '文章') + " - RETOUR";
         })
+        // ... catch ...
         .catch(error => {
           document.getElementById('markdown-content').innerHTML = `<h1>❌ 加载失败</h1><p>请确保您是通过本地服务器 (Live Server) 访问的，而不是直接双击 HTML 文件。<br>错误信息: ${error.message}</p>`;
         });

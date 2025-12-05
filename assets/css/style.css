@@ -324,3 +324,247 @@ body.menu-open .nav-item:nth-child(1) {
   /* 建议添加：底部间距 */
   margin-bottom: 15px;
 }
+/* ======================================= */
+/* 🎯 字体统一与美化 (解决字体不一和锯齿) */
+/* ======================================= */
+
+/* 1. 强制所有代码元素使用同一套好看的字体栈 */
+/* !important 确保覆盖浏览器默认和 Prism 的设置 */
+code,
+pre,
+.mac-window,
+.mac-window div,
+.mac-window span {
+  font-family: 'Menlo', 'Monaco', 'Consolas', 'Andale Mono', 'Ubuntu Mono', 'Courier New', monospace !important;
+
+  /* 开启抗锯齿，让字体更清晰圆润 */
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  text-rendering: optimizeLegibility !important;
+}
+
+/* 2. 行内代码样式 (正文中的 `code`) */
+:not(pre) > code {
+  background-color: rgba(27, 31, 35, 0.05); /* 淡淡的灰色背景 */
+  color: #24292e; /* 深灰色文字 */
+  padding: 2px 5px;
+  border-radius: 4px; /* 小圆角 */
+  font-size: 0.9em; /* 稍微小一点点，为了跟中文混排更好看 */
+  border: 1px solid rgba(0, 0, 0, 0.05); /* 极淡的边框 */
+  margin: 0 2px; /* 左右留一点空隙 */
+}
+
+/* ======================================================= */
+/* 🦓 斑马纹终极版：蓝边装饰 + 细字体标题 */
+/* ======================================================= */
+
+/* 1. 代码块外壳 (pre) */
+#markdown-content pre[class*='language-'] {
+  position: relative;
+  margin-bottom: 24px;
+  padding: 0 !important;
+
+  background-color: #fff;
+
+  /* 🟦 1. 左侧蓝线：4像素宽的科技蓝 */
+  border-left: 4px solid #2196f3 !important;
+
+  /* 其他边框 (上下右是细灰线) */
+  border-top: 1px solid #e1e4e8;
+  border-right: 1px solid #e1e4e8;
+  border-bottom: 1px solid #e1e4e8;
+
+  border-radius: 4px; /* 圆角稍微改小一点，配合方正的蓝边更好看 */
+  overflow: hidden;
+}
+
+/* 2. 顶部标题栏 (Header) */
+#markdown-content pre[class*='language-']::before {
+  content: attr(data-language);
+  display: block;
+  width: 100%;
+  height: 32px;
+
+  background: #24292e; /* 深色底 */
+  color: #fff;
+
+  font-size: 14px;
+  font-family: 'Menlo', 'Monaco', 'Consolas', monospace;
+
+  /* 🔠 2. 字体变细：从 bold 改为 normal */
+  font-weight: normal;
+
+  /* 增加一点字间距，让细字体看起来更精致 */
+  letter-spacing: 1px;
+
+  line-height: 32px;
+  text-align: left;
+  padding-left: 16px;
+  border-bottom: 1px solid #e1e4e8;
+}
+
+/* 3. 代码内容区 (斑马纹背景) */
+#markdown-content pre[class*='language-'] > code {
+  display: block;
+  font-family: 'Menlo', 'Monaco', 'Consolas', monospace !important;
+  font-size: 15px !important;
+
+  /* 行高锁定 24px */
+  line-height: 24px !important;
+
+  /* 斑马纹：白 + 极淡灰 */
+  background-image: linear-gradient(#ffffff 50%, #f6f8fa 50%);
+  background-size: 100% 48px;
+  background-attachment: local;
+
+  /* 对齐设置 */
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+
+  margin-top: 0 !important;
+
+  overflow-x: auto;
+  color: #24292e;
+}
+
+/* 4. Mermaid 修复 (保持白底，无边框，无标题) */
+pre.mermaid,
+.mermaid pre {
+  background: #fff !important;
+  border: none !important;
+}
+pre.mermaid::before {
+  display: none !important;
+}
+/* ======================================= */
+/* 📋 复制代码按钮样式 */
+/* ======================================= */
+
+/* 1. 代码块右上角的按钮 */
+.copy-code-btn {
+  position: absolute;
+  top: 6px; /* 放在 Mac 顶部栏垂直居中 (36px高度的一半左右) */
+  right: 10px; /* 放在右侧 */
+
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #586069;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+
+  /* 核心：默认隐藏 (透明)，悬停时显示 */
+  opacity: 0;
+  z-index: 20; /* 确保在 Mac 顶部栏之上 */
+}
+
+/* 当鼠标悬停在代码块(pre)上时，显示按钮 */
+#markdown-content pre[class*='language-']:hover .copy-code-btn {
+  opacity: 1;
+}
+
+/* 鼠标悬停在按钮上时，加深背景 */
+.copy-code-btn:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  transform: scale(1.1);
+}
+
+/* 复制成功后的状态 */
+.copy-code-btn.copied {
+  color: #28a745; /* 绿色 */
+}
+
+/* ======================================= */
+/* 🖱️ 行内代码点击效果 */
+/* ======================================= */
+
+/* 行内代码悬停效果 */
+:not(pre) > code:hover {
+  background-color: #e1e4e8; /* 稍微深一点的背景 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background 0.2s;
+}
+
+/* 点击行内代码后弹出的提示框 (Tooltip) */
+.copy-tooltip {
+  position: absolute;
+  background: #000;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  pointer-events: none; /* 不阻挡鼠标 */
+  z-index: 1000;
+  opacity: 1;
+  transition: all 0.3s ease;
+  transform: translateY(0);
+}
+
+/* --- 💡 提示块样式 --- */
+.admonition {
+  margin: 24px 0;
+  border-left: 5px solid #ccc;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+.admonition-title {
+  padding: 10px 16px;
+  font-weight: bold;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+.admonition-content {
+  padding: 16px;
+  color: #333;
+}
+.admonition-content p {
+  margin: 0;
+}
+
+/* 颜色定义 */
+.admonition-tip {
+  border-color: #4caf50;
+  background-color: #f1f8e9;
+}
+.admonition-tip .admonition-title {
+  color: #2e7d32;
+  background-color: rgba(76, 175, 80, 0.1);
+}
+.admonition-tip .admonition-icon::before {
+  content: '💡 ';
+  margin-right: 8px;
+}
+
+.admonition-note {
+  border-color: #2196f3;
+  background-color: #e3f2fd;
+}
+.admonition-note .admonition-title {
+  color: #1565c0;
+  background-color: rgba(33, 150, 243, 0.1);
+}
+.admonition-note .admonition-icon::before {
+  content: 'ℹ️ ';
+  margin-right: 8px;
+}
+
+.admonition-warning {
+  border-color: #ff9800;
+  background-color: #fff3e0;
+}
+.admonition-warning .admonition-title {
+  color: #ef6c00;
+  background-color: rgba(255, 152, 0, 0.1);
+}
+.admonition-warning .admonition-icon::before {
+  content: '⚠️ ';
+  margin-right: 8px;
+}
