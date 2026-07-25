@@ -1,52 +1,192 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>document.documentElement.classList.add("js");</script>
+    <title>Sheepkinn — Personal site</title>
+    <meta
+      name="description"
+      content="Sheepkinn 的个人主页：前端实验、开源项目与学习小记。"
+    >
+    <meta name="theme-color" content="#040406">
+    <link rel="canonical" href="https://sheepkinn.github.io/">
+    <link rel="icon" href="/assets/images/avatar.jpg">
+    <link
+      rel="alternate"
+      type="application/atom+xml"
+      title="Sheepkinn — Blog"
+      href="/feed.xml"
+    >
+    <link rel="stylesheet" href="/assets/css/style.css?v=20260725.1">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Sheepkinn — Personal site">
+    <meta
+      property="og:description"
+      content="前端实验、开源项目与学习小记。兴趣大于一切。"
+    >
+    <meta property="og:url" content="https://sheepkinn.github.io/">
+    <meta property="og:site_name" content="Sheepkinn">
+    <meta property="og:image" content="https://sheepkinn.github.io/assets/images/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Hello, I am Sheepkinn">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://sheepkinn.github.io/assets/images/og.png">
+    <script src="/assets/js/main.js?v=20260725.1" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#content">跳到正文</a>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RETOUR - Fixed Logic</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;650;700;800;900&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css">
-</head>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="site-branding" href="/" aria-label="Sheepkinn 首页">
+          <img
+            class="site-avatar"
+            src="/assets/images/avatar.jpg"
+            width="48"
+            height="48"
+            alt=""
+          >
+          <span class="site-title">Sheepkinn</span>
+        </a>
 
-<body>
-  <div id="intro-container">
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-label="打开导航"
+          aria-controls="site-navigation"
+          aria-expanded="false"
+          data-menu-toggle
+        >
+          <span class="menu-toggle-icon" aria-hidden="true"></span>
+        </button>
 
-    <header class="header-bar">
-      <img src="assets/images/fire.png" alt="Icon" class="top-icon">
-
-      <div class="top-menu" id="menu-btn">
-
-        <span class="bracket-left">[/</span>
-
-        <div class="inner-mask">
-          <span class="text-close">CLOSE</span>
-        </div>
-
-        <span class="bracket-right">]</span>
-
-        <div class="outer-mask">
-          <span class="text-menu">MENU</span>
-        </div>
-
+        <nav
+          class="site-nav"
+          id="site-navigation"
+          aria-label="主导航"
+          data-menu
+        >
+          <a href="/pages/projects.html">Projects</a>
+          <a href="/pages/blog.html">Blog</a>
+          <a href="/pages/about.html">About</a>
+          <a href="/pages/contact.html">Contact</a>
+        </nav>
       </div>
     </header>
 
-    <div class="text-wrapper">
-      <h1 class="retour-text">RETOUR :)</h1>
-    </div>
+    <main class="site-main" id="content">
+      <header class="page-header alignwide">
+        <h1>Hello, I am<br>Sheepkinn</h1>
+      </header>
 
-    <nav class="fullscreen-nav">
-      <a href="pages/about.html" class="nav-item">ABOUT ME</a>
-      <a href="pages/projects.html" class="nav-item">PROJECTS</a>
-      <a href="pages/blog.html" class="nav-item">BLOG</a>
-    </nav>
+      <div class="home-grid alignwide">
+        <section class="home-section home-about" aria-labelledby="home-about-title">
+          <img
+            class="home-about-portrait"
+            src="/assets/images/profile.png"
+            width="954"
+            height="954"
+            alt="Sheepkinn 个人主页使用的银发角色插画"
+          >
+          <h2 class="home-about-copy" id="home-about-title">
+            我是一名热衷于新技术的爱好者。兴趣大于一切！
+          </h2>
+        </section>
 
-    <div class="black-curtain"></div>
-  </div>
+        <section class="home-section home-projects" aria-labelledby="recent-projects">
+          <h2 class="section-heading" id="recent-projects">
+            <a href="/pages/projects.html">Recent Projects</a>
+          </h2>
+          <ol class="project-list">
+            <li class="list-entry">
+              <h3>
+                <a href="https://coin.sheepkinn.com/" target="_blank" rel="noreferrer">
+                  Coin Flip Sheep
+                </a>
+              </h3>
+              <p class="entry-excerpt">
+                在浏览器中点击硬币，对比单利与复利增长，并把资产放进一场夸张的实时富豪榜实验。
+              </p>
+              <time class="entry-date" datetime="2026-05-25">May 25, 2026</time>
+            </li>
+            <li class="list-entry">
+              <h3>
+                <a
+                  href="https://sheepkinn.github.io/shit_mbti/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  人格匹配测试
+                </a>
+              </h3>
+              <p class="entry-excerpt">
+                一组 30 题的网页人格测试，用权重匹配角色，并在浏览器中保留历史结果。
+              </p>
+              <time class="entry-date" datetime="2026-04-11">Apr 11, 2026</time>
+            </li>
+            <li class="list-entry">
+              <h3>
+                <a
+                  href="https://github.com/sheepkinn/Talaria_course"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Talaria Course
+                </a>
+              </h3>
+              <p class="entry-excerpt">
+                以“赫尔墨斯之靴”为名的浏览器交互脚本实验，记录自动化动作与网页行为模拟。
+              </p>
+              <time class="entry-date" datetime="2025-12-30">Dec 30, 2025</time>
+            </li>
+          </ol>
+          <a class="browse-link" href="/pages/projects.html">Browse all projects</a>
+        </section>
 
-  <script src="assets/js/main.js"></script>
-</body>
+        <section class="home-section home-blog" aria-labelledby="latest-articles">
+          <h2 class="section-heading" id="latest-articles">
+            <a href="/pages/blog.html">Thoughts &amp; ideas</a>
+          </h2>
+          <ol class="post-list">
+            <li class="list-entry">
+              <h3><a href="/posts/post-4.html">12 月 10 日小记</a></h3>
+              <p class="entry-excerpt">
+                今日网站更新了个 icon，不会出现“反色的女孩”了。
+              </p>
+              <time class="entry-date" datetime="2025-12-10">Dec 10, 2025</time>
+            </li>
+            <li class="list-entry">
+              <h3><a href="/posts/post-3.html">12 月 4 日小记</a></h3>
+              <p class="entry-excerpt">
+                先总结一下网站更新。今天针对博客界面，增加了网页渲染出来的代码块和代码行的边框阴影和代码块内的斑马线。
+              </p>
+              <time class="entry-date" datetime="2025-12-05">Dec 5, 2025</time>
+            </li>
+            <li class="list-entry">
+              <h3><a href="/posts/post-2.html">12 月 3 日小记</a></h3>
+              <p class="entry-excerpt">
+                今天上午写了 12 月 2 日的小记，然后今天没有对网站相关的部分做出改动。今天下午主要尝试在 wsl 中下载和配置 gemini-cli。
+              </p>
+              <time class="entry-date" datetime="2025-12-04">Dec 4, 2025</time>
+            </li>
+          </ol>
+          <a class="browse-link" href="/pages/blog.html">Read all articles</a>
+        </section>
+      </div>
+    </main>
 
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <p>© <span data-current-year>2026</span> Sheepkinn</p>
+        <p>
+          Frontend adaptation of
+          <a href="https://mroya.eu/" target="_blank" rel="noreferrer">Havi</a>
+        </p>
+      </div>
+    </footer>
+
+    <div class="page-transition" aria-hidden="true"></div>
+  </body>
 </html>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-CN">
+  <title>Sheepkinn — Blog</title>
+  <id>https://sheepkinn.github.io/</id>
+  <link href="https://sheepkinn.github.io/feed.xml" rel="self"/>
+  <link href="https://sheepkinn.github.io/pages/blog.html"/>
+  <updated>2025-12-10T00:00:00+08:00</updated>
+  <author>
+    <name>Sheepkinn</name>
+    <uri>https://github.com/sheepkinn</uri>
+  </author>
+  <entry>
+    <title>12 月 10 日小记</title>
+    <id>https://sheepkinn.github.io/posts/post-4.html</id>
+    <link href="https://sheepkinn.github.io/posts/post-4.html"/>
+    <updated>2025-12-10T00:00:00+08:00</updated>
+    <summary>今日网站更新了个 icon，不会出现“反色的女孩”了。</summary>
+  </entry>
+  <entry>
+    <title>12 月 4 日小记</title>
+    <id>https://sheepkinn.github.io/posts/post-3.html</id>
+    <link href="https://sheepkinn.github.io/posts/post-3.html"/>
+    <updated>2025-12-05T00:00:00+08:00</updated>
+    <summary>先总结一下网站更新。今天针对博客界面，增加了网页渲染出来的代码块和代码行的边框阴影和代码块内的斑马线。</summary>
+  </entry>
+  <entry>
+    <title>12 月 3 日小记</title>
+    <id>https://sheepkinn.github.io/posts/post-2.html</id>
+    <link href="https://sheepkinn.github.io/posts/post-2.html"/>
+    <updated>2025-12-04T00:00:00+08:00</updated>
+    <summary>今天上午写了 12 月 2 日的小记，然后今天没有对网站相关的部分做出改动。今天下午主要尝试在 wsl 中下载和配置 gemini-cli。</summary>
+  </entry>
+  <entry>
+    <title>12 月 2 日小记</title>
+    <id>https://sheepkinn.github.io/posts/post-1.html</id>
+    <link href="https://sheepkinn.github.io/posts/post-1.html"/>
+    <updated>2025-12-03T00:00:00+08:00</updated>
+    <summary>首先，我想先记录一下先前的网站搭建的时间节点。因为我想规范一下 blog 列表，就把之前那几个看起来不像是博客的东西删掉了。</summary>
+  </entry>
+</feed>

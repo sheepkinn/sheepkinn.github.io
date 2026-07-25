@@ -1,41 +1,235 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>document.documentElement.classList.add("js");</script>
+    <title>Projects — Sheepkinn</title>
+    <meta
+      name="description"
+      content="Sheepkinn 的公开项目：网页实验、JavaScript 工具与学习仓库。"
+    >
+    <meta name="theme-color" content="#040406">
+    <link rel="canonical" href="https://sheepkinn.github.io/pages/projects.html">
+    <link rel="icon" href="/assets/images/avatar.jpg">
+    <link rel="stylesheet" href="/assets/css/style.css?v=20260725.1">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Projects — Sheepkinn">
+    <meta
+      property="og:description"
+      content="网页实验、JavaScript 工具与学习仓库。"
+    >
+    <meta property="og:url" content="https://sheepkinn.github.io/pages/projects.html">
+    <meta property="og:site_name" content="Sheepkinn">
+    <meta property="og:image" content="https://sheepkinn.github.io/assets/images/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Hello, I am Sheepkinn">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://sheepkinn.github.io/assets/images/og.png">
+    <script src="/assets/js/main.js?v=20260725.1" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#content">跳到正文</a>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>我的项目 - 我的个人网站</title>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="site-branding" href="/" aria-label="Sheepkinn 首页">
+          <img
+            class="site-avatar"
+            src="/assets/images/avatar.jpg"
+            width="48"
+            height="48"
+            alt=""
+          >
+          <span class="site-title">Sheepkinn</span>
+        </a>
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-label="打开导航"
+          aria-controls="site-navigation"
+          aria-expanded="false"
+          data-menu-toggle
+        >
+          <span class="menu-toggle-icon" aria-hidden="true"></span>
+        </button>
+        <nav class="site-nav" id="site-navigation" aria-label="主导航" data-menu>
+          <a href="/pages/projects.html" aria-current="page">Projects</a>
+          <a href="/pages/blog.html">Blog</a>
+          <a href="/pages/about.html">About</a>
+          <a href="/pages/contact.html">Contact</a>
+        </nav>
+      </div>
+    </header>
 
-  <link rel="stylesheet" href="../assets/css/style.css">
-</head>
+    <main class="site-main" id="content">
+      <header class="page-header alignwide">
+        <h1>Projects</h1>
+        <p>从公开仓库中整理出的网页实验、自动化脚本与学习记录。</p>
+      </header>
 
-<body>
-  <header>
-    <h1>我的项目</h1>
-    <nav>
-      <a href="../index.html">🏠 首页</a> |
-      <a href="about.html">关于我</a> |
-      <a href="projects.html">我的项目</a> |
-      <a href="blog.html">我的博客</a>
-    </nav>
-  </header>
+      <ol class="archive-grid alignwide">
+        <li class="archive-card">
+          <h2>
+            <a href="https://github.com/sheepkinn/coin-flip-sheep" target="_blank" rel="noreferrer">
+              Coin Flip Sheep
+            </a>
+          </h2>
+          <p class="entry-excerpt">
+            一个单利与复利的财富点击器。点击硬币推进年份，比较账户增长，并加入排行榜、里程碑与一连串夸张事件。
+          </p>
+          <time class="entry-date" datetime="2026-05-25">May 25, 2026</time>
+          <ul class="project-tags" aria-label="技术">
+            <li>JavaScript</li>
+            <li>HTML</li>
+            <li>CSS</li>
+          </ul>
+          <div class="project-links">
+            <a href="https://coin.sheepkinn.com/" target="_blank" rel="noreferrer">Live demo ↗</a>
+            <a
+              href="https://github.com/sheepkinn/coin-flip-sheep"
+              target="_blank"
+              rel="noreferrer"
+            >Source ↗</a>
+          </div>
+        </li>
 
-  <main>
-    <section>
-      <h2>我的作品展示</h2>
-      <p>这里是sheepkinn的超级项目库👍</p>
-      <ul>
-        <li>项目一：基于家庭酒桌的礼仪研发的自动鱼头朝向器。</li>
-        <li>项目二：使用CloseAI和Deepsuck大模型完成了一篇国家级rubbish和两篇省级garbage</li>
-      </ul>
-    </section>
-  </main>
+        <li class="archive-card">
+          <h2>
+            <a href="https://github.com/sheepkinn/shit_mbti" target="_blank" rel="noreferrer">
+              人格匹配测试
+            </a>
+          </h2>
+          <p class="entry-excerpt">
+            通过 30 道情景题和权重规则匹配人物结果，展示置信度与 Top 5，并把测试历史保存在本机浏览器中。
+          </p>
+          <time class="entry-date" datetime="2026-04-11">Apr 11, 2026</time>
+          <ul class="project-tags" aria-label="技术">
+            <li>JavaScript</li>
+            <li>Local storage</li>
+            <li>Quiz</li>
+          </ul>
+          <div class="project-links">
+            <a
+              href="https://sheepkinn.github.io/shit_mbti/"
+              target="_blank"
+              rel="noreferrer"
+            >Live demo ↗</a>
+            <a href="https://github.com/sheepkinn/shit_mbti" target="_blank" rel="noreferrer">
+              Source ↗
+            </a>
+          </div>
+        </li>
 
-  <footer>
-    <p>&copy; 2025 我的网站。保留所有权利。</p>
-  </footer>
+        <li class="archive-card">
+          <h2>
+            <a href="https://github.com/sheepkinn/Talaria_course" target="_blank" rel="noreferrer">
+              Talaria Course
+            </a>
+          </h2>
+          <p class="entry-excerpt">
+            “赫尔墨斯之靴”：一组用于学习的 Tampermonkey 脚本，模拟网页动作，并在正方教务系统页面上做过交互测试。
+          </p>
+          <time class="entry-date" datetime="2025-12-30">Dec 30, 2025</time>
+          <ul class="project-tags" aria-label="技术">
+            <li>JavaScript</li>
+            <li>Userscript</li>
+            <li>Automation</li>
+          </ul>
+          <div class="project-links">
+            <a
+              href="https://github.com/sheepkinn/Talaria_course"
+              target="_blank"
+              rel="noreferrer"
+            >Source ↗</a>
+          </div>
+        </li>
 
-  <script src="../assets/js/main.js"></script>
-</body>
+        <li class="archive-card">
+          <h2>
+            <a
+              href="https://github.com/sheepkinn/sheepkinn.github.io"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Sheepkinn.github.io
+            </a>
+          </h2>
+          <p class="entry-excerpt">
+            这个个人主页本身：项目、博客与个人介绍的静态前端实现，也是持续记录建站过程的地方。
+          </p>
+          <time class="entry-date" datetime="2025-11-23">Nov 23, 2025</time>
+          <ul class="project-tags" aria-label="技术">
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>GitHub Pages</li>
+          </ul>
+          <div class="project-links">
+            <a
+              href="https://github.com/sheepkinn/sheepkinn.github.io"
+              target="_blank"
+              rel="noreferrer"
+            >Source ↗</a>
+          </div>
+        </li>
 
+        <li class="archive-card">
+          <h2>
+            <a href="https://github.com/sheepkinn/Home" target="_blank" rel="noreferrer">
+              NBTCA Home
+            </a>
+          </h2>
+          <p class="entry-excerpt">
+            NBTCA 首页项目的个人 fork；上游仓库的 README 提供了 Astro 项目的开发与构建命令。
+          </p>
+          <time class="entry-date" datetime="2024-11-27">Nov 27, 2024</time>
+          <ul class="project-tags" aria-label="技术">
+            <li>Astro</li>
+            <li>CSS</li>
+            <li>Fork</li>
+          </ul>
+          <div class="project-links">
+            <a href="https://nbtca.space" target="_blank" rel="noreferrer">Website ↗</a>
+            <a href="https://github.com/sheepkinn/Home" target="_blank" rel="noreferrer">
+              Fork ↗
+            </a>
+          </div>
+        </li>
+
+        <li class="archive-card">
+          <h2>
+            <a href="https://github.com/sheepkinn/dev101" target="_blank" rel="noreferrer">
+              Dev 101
+            </a>
+          </h2>
+          <p class="entry-excerpt">
+            加入 NBTCA 开发团队第一天留下的学习仓库，记录“一切刚开始，还有很多东西要学”的起点。
+          </p>
+          <time class="entry-date" datetime="2024-11-16">Nov 16, 2024</time>
+          <ul class="project-tags" aria-label="技术">
+            <li>Learning</li>
+            <li>NBTCA</li>
+            <li>Fork</li>
+          </ul>
+          <div class="project-links">
+            <a href="https://github.com/sheepkinn/dev101" target="_blank" rel="noreferrer">
+              Repository ↗
+            </a>
+          </div>
+        </li>
+      </ol>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <p>© <span data-current-year>2026</span> Sheepkinn</p>
+        <p>
+          Frontend adaptation of
+          <a href="https://mroya.eu/" target="_blank" rel="noreferrer">Havi</a>
+        </p>
+      </div>
+    </footer>
+    <div class="page-transition" aria-hidden="true"></div>
+  </body>
 </html>

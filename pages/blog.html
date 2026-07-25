@@ -1,74 +1,144 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>document.documentElement.classList.add("js");</script>
+    <title>Blog — Sheepkinn</title>
+    <meta
+      name="description"
+      content="Sheepkinn 的学习小记：建站、Linux 工具、终端与日常思考。"
+    >
+    <meta name="theme-color" content="#040406">
+    <link rel="canonical" href="https://sheepkinn.github.io/pages/blog.html">
+    <link rel="icon" href="/assets/images/avatar.jpg">
+    <link
+      rel="alternate"
+      type="application/atom+xml"
+      title="Sheepkinn — Blog"
+      href="/feed.xml"
+    >
+    <link rel="stylesheet" href="/assets/css/style.css?v=20260725.1">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Blog — Sheepkinn">
+    <meta
+      property="og:description"
+      content="建站、Linux 工具、终端与日常思考。"
+    >
+    <meta property="og:url" content="https://sheepkinn.github.io/pages/blog.html">
+    <meta property="og:site_name" content="Sheepkinn">
+    <meta property="og:image" content="https://sheepkinn.github.io/assets/images/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Hello, I am Sheepkinn">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://sheepkinn.github.io/assets/images/og.png">
+    <script src="/assets/js/main.js?v=20260725.1" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#content">跳到正文</a>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>我的博客 - 文章列表</title>
-
-  <link rel="stylesheet" href="../assets/css/style.css">
-</head>
-
-<body>
-  <header>
-    <h1>我的博客</h1>
-    <nav>
-      <a href="../index.html">🏠 首页</a> |
-      <a href="about.html">关于我</a> |
-      <a href="projects.html">我的项目</a> |
-      <a href="blog.html">我的博客</a>
-    </nav>
-  </header>
-
-  <main class="page-content">
-    <h2>最新文章</h2>
-
-    <section class="blog-list">
-
-      <div class="blog-post-card">
-        <h3>第四篇博客：今日总结</h3>
-        <p class="post-meta">发布于 2025年12月10日</p>
-        <p>`总结今日的学习`</p>
-        <a href="article.html?post=post-4" class="read-more">
-          继续阅读 &rarr;
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="site-branding" href="/" aria-label="Sheepkinn 首页">
+          <img
+            class="site-avatar"
+            src="/assets/images/avatar.jpg"
+            width="48"
+            height="48"
+            alt=""
+          >
+          <span class="site-title">Sheepkinn</span>
         </a>
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-label="打开导航"
+          aria-controls="site-navigation"
+          aria-expanded="false"
+          data-menu-toggle
+        >
+          <span class="menu-toggle-icon" aria-hidden="true"></span>
+        </button>
+        <nav class="site-nav" id="site-navigation" aria-label="主导航" data-menu>
+          <a href="/pages/projects.html">Projects</a>
+          <a href="/pages/blog.html" aria-current="page">Blog</a>
+          <a href="/pages/about.html">About</a>
+          <a href="/pages/contact.html">Contact</a>
+        </nav>
       </div>
+    </header>
 
-      <div class="blog-post-card">
-        <h3>第三篇博客：今日总结</h3>
-        <p class="post-meta">发布于 2025年12月5日</p>
-        <p>`总结今日的学习`</p>
-        <a href="article.html?post=post-3" class="read-more">
-          继续阅读 &rarr;
-        </a>
+    <main class="site-main" id="content">
+      <header class="page-header alignwide">
+        <h1>Thoughts &amp; ideas</h1>
+        <p>把学习过程、踩过的坑和偶尔冒出的想法留在这里。</p>
+      </header>
+
+      <ol class="archive-grid alignwide">
+        <li class="archive-card">
+          <h2><a href="/posts/post-4.html">12 月 10 日小记</a></h2>
+          <p class="entry-excerpt">
+            今日<strong>网站更新</strong>了个 icon，不会出现“反色的女孩”了。
+          </p>
+          <time class="entry-date" datetime="2025-12-10">Dec 10, 2025</time>
+          <ul class="article-tags" aria-label="标签">
+            <li>i3</li>
+            <li>Linux</li>
+            <li>日常</li>
+          </ul>
+        </li>
+
+        <li class="archive-card">
+          <h2><a href="/posts/post-3.html">12 月 4 日小记</a></h2>
+          <p class="entry-excerpt">
+            先总结一下<strong>网站更新</strong>。今天针对博客界面，增加了网页渲染出来的代码块和代码行的边框阴影和代码块内的斑马线。
+          </p>
+          <time class="entry-date" datetime="2025-12-05">Dec 5, 2025</time>
+          <ul class="article-tags" aria-label="标签">
+            <li>Website</li>
+            <li>Ventoy</li>
+            <li>Arch Linux</li>
+          </ul>
+        </li>
+
+        <li class="archive-card">
+          <h2><a href="/posts/post-2.html">12 月 3 日小记</a></h2>
+          <p class="entry-excerpt">
+            今天上午写了 12 月 2 日的小记，然后今天没有对网站相关的部分做出改动。今天下午主要尝试在 wsl 中下载和配置 gemini-cli。
+          </p>
+          <time class="entry-date" datetime="2025-12-04">Dec 4, 2025</time>
+          <ul class="article-tags" aria-label="标签">
+            <li>Gemini CLI</li>
+            <li>WSL</li>
+            <li>npm</li>
+          </ul>
+        </li>
+
+        <li class="archive-card">
+          <h2><a href="/posts/post-1.html">12 月 2 日小记</a></h2>
+          <p class="entry-excerpt">
+            首先，我想先记录一下先前的网站搭建的时间节点。因为我想规范一下 blog 列表，就把之前那几个看起来不像是博客的东西删掉了。
+          </p>
+          <time class="entry-date" datetime="2025-12-03">Dec 3, 2025</time>
+          <ul class="article-tags" aria-label="标签">
+            <li>Website</li>
+            <li>Neovim</li>
+            <li>tmux</li>
+          </ul>
+        </li>
+      </ol>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <p>© <span data-current-year>2026</span> Sheepkinn</p>
+        <p>
+          Frontend adaptation of
+          <a href="https://mroya.eu/" target="_blank" rel="noreferrer">Havi</a>
+        </p>
       </div>
-
-      <div class="blog-post-card">
-        <h3>第二篇博客：今日总结</h3>
-        <p class="post-meta">发布于 2025年12月4日</p>
-        <p>`总结今日的学习`</p>
-        <a href="article.html?post=post-2" class="read-more">
-          继续阅读 &rarr;
-        </a>
-      </div>
-
-      <div class="blog-post-card">
-        <h3>第一篇博客：今日总结</h3>
-        <p class="post-meta">发布于 2025年12月3日</p>
-        <p>`总结今日的学习和晚上的思考`</p>
-        <a href="article.html?post=post-1" class="read-more">
-          继续阅读 &rarr;
-        </a>
-      </div>
-
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <p>&copy; 2025 我的网站。保留所有权利。</p>
-  </footer>
-
-  <script src="../assets/js/main.js"></script>
-</body>
-
+    </footer>
+    <div class="page-transition" aria-hidden="true"></div>
+  </body>
 </html>
