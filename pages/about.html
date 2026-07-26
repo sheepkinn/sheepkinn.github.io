@@ -1,38 +1,189 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>document.documentElement.classList.add("js");</script>
+    <title>About — Sheepkinn</title>
+    <meta
+      name="description"
+      content="关于 Sheepkinn：兴趣驱动的新技术爱好者，记录前端、Linux 与自动化实验。"
+    >
+    <meta name="theme-color" content="#040406">
+    <link rel="canonical" href="https://sheepkinn.github.io/pages/about.html">
+    <link rel="icon" href="/assets/images/avatar.jpg">
+    <link rel="stylesheet" href="/assets/css/style.css?v=20260725.1">
+    <meta property="og:type" content="profile">
+    <meta property="og:title" content="About — Sheepkinn">
+    <meta
+      property="og:description"
+      content="兴趣驱动的新技术爱好者，记录前端、Linux 与自动化实验。"
+    >
+    <meta property="og:url" content="https://sheepkinn.github.io/pages/about.html">
+    <meta property="og:site_name" content="Sheepkinn">
+    <meta property="og:image" content="https://sheepkinn.github.io/assets/images/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Hello, I am Sheepkinn">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://sheepkinn.github.io/assets/images/og.png">
+    <script src="/assets/js/main.js?v=20260725.1" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#content">跳到正文</a>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>关于我 - 我的个人网站</title>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="site-branding" href="/" aria-label="Sheepkinn 首页">
+          <img
+            class="site-avatar"
+            src="/assets/images/avatar.jpg"
+            width="48"
+            height="48"
+            alt=""
+          >
+          <span class="site-title">Sheepkinn</span>
+        </a>
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-label="打开导航"
+          aria-controls="site-navigation"
+          aria-expanded="false"
+          data-menu-toggle
+        >
+          <span class="menu-toggle-icon" aria-hidden="true"></span>
+        </button>
+        <nav class="site-nav" id="site-navigation" aria-label="主导航" data-menu>
+          <a href="/pages/projects.html">Projects</a>
+          <a href="/pages/blog.html">Blog</a>
+          <a href="/pages/about.html" aria-current="page">About</a>
+          <a href="/pages/contact.html">Contact</a>
+        </nav>
+      </div>
+    </header>
 
-  <link rel="stylesheet" href="../assets/css/style.css">
-</head>
+    <main class="site-main" id="content">
+      <header class="page-header aligncontent">
+        <h1>About me</h1>
+      </header>
 
-<body>
-  <header>
-    <h1>关于我</h1>
-    <nav>
-      <a href="../index.html">🏠 首页</a> |
-      <a href="about.html">关于我</a> |
-      <a href="projects.html">我的项目</a> |
-      <a href="blog.html">我的博客</a>
-    </nav>
-  </header>
+      <div class="aligncontent">
+        <section class="about-intro" aria-labelledby="intro-title">
+          <h2 class="lead" id="intro-title">
+            你好，我是 Sheepkinn。这个名字来自英语里的 sheep 与日语里的“菌（きん）”。
+          </h2>
+          <p>
+            我是一名热衷于新技术的爱好者，兴趣大于一切！这个主页用来整理公开项目，也记录我学习工具、搭建网站和解决问题的过程。
+          </p>
+          <div class="about-gallery">
+            <img
+              src="/assets/images/profile.png"
+              width="954"
+              height="954"
+              alt="个人主页使用的银发角色插画"
+            >
+            <img
+              src="/assets/images/blog/gemini111.png"
+              width="1560"
+              height="977"
+              alt="Gemini CLI 运行在终端中的截图"
+            >
+          </div>
+        </section>
 
-  <main>
-    <section>
-      <h2>我的个人介绍</h2>
-      <p>我叫sheepkinn,来源与羊的英语和菌的日语</p>
-      <p>我是一名热衷于新技术的爱好者，兴趣大于一切！</p>
-    </section>
-  </main>
+        <section class="content-section" aria-labelledby="exploring-title">
+          <h2 id="exploring-title">What I’m exploring</h2>
+          <div class="feature-columns">
+            <article class="feature">
+              <h3>Web experiments</h3>
+              <p>
+                用 HTML、CSS 和 JavaScript 做小型互动页面，把想法尽快放进真实浏览器里。
+              </p>
+            </article>
+            <article class="feature">
+              <h3>Linux &amp; terminal</h3>
+              <p>
+                在 WSL 与 Arch 环境中折腾 Neovim、tmux、i3、输入法和命令行工具。
+              </p>
+            </article>
+            <article class="feature">
+              <h3>Automation</h3>
+              <p>
+                通过 userscript 与浏览器交互实验，理解网页结构、状态和自动化动作。
+              </p>
+            </article>
+          </div>
+        </section>
 
-  <footer>
-    <p>&copy; 2025 我的网站。保留所有权利。</p>
-  </footer>
+        <section class="content-section" aria-labelledby="journey-title">
+          <h2 id="journey-title">A small timeline</h2>
+          <div class="timeline">
+            <article class="timeline-row">
+              <time class="timeline-date" datetime="2024-11">Nov 2024</time>
+              <div>
+                <h3>Starting on GitHub</h3>
+                <p>
+                  创建 Sheepkinn 账号，从 dev101 与 NBTCA 首页 fork 开始接触公开协作仓库。
+                </p>
+              </div>
+            </article>
+            <article class="timeline-row">
+              <time class="timeline-date" datetime="2025-12">Dec 2025</time>
+              <div>
+                <h3>Building and writing</h3>
+                <p>
+                  从零搭建个人主页，加入动效、Markdown、代码块与 Mermaid，并写下四篇学习小记。
+                </p>
+              </div>
+            </article>
+            <article class="timeline-row">
+              <time class="timeline-date" datetime="2026-04">Apr–May 2026</time>
+              <div>
+                <h3>Interactive projects</h3>
+                <p>
+                  发布人格匹配测试和财富硬币，用原生前端实现题目权重、浏览器历史与互动状态。
+                </p>
+              </div>
+            </article>
+            <article class="timeline-row">
+              <time class="timeline-date" datetime="2026-07">Jul 2026</time>
+              <div>
+                <h3>A new home</h3>
+                <p>
+                  把 Havi 的极简作品集语言迁移成纯前端站点，并整理此前散落的项目与文章。
+                </p>
+              </div>
+            </article>
+          </div>
+        </section>
 
-  <script src="../assets/js/main.js"></script>
-</body>
+        <aside class="callout" aria-labelledby="connect-title">
+          <h2 id="connect-title">Let’s connect</h2>
+          <p>
+            想看看我正在做什么，或从源码开始一段讨论，可以直接前往 GitHub。
+          </p>
+          <a
+            class="button-link"
+            href="https://github.com/sheepkinn"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Visit GitHub ↗
+          </a>
+        </aside>
+      </div>
+    </main>
 
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <p>© <span data-current-year>2026</span> Sheepkinn</p>
+        <p>
+          Frontend adaptation of
+          <a href="https://mroya.eu/" target="_blank" rel="noreferrer">Havi</a>
+        </p>
+      </div>
+    </footer>
+    <div class="page-transition" aria-hidden="true"></div>
+  </body>
 </html>
