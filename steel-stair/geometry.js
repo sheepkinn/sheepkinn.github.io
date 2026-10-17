@@ -1,4 +1,5 @@
-export const VERSION='1.0.0';
+import {wrapDXF,MODELSPACE_OWNER} from './dxf-template.js';
+export const VERSION='1.0.1';
 export const fmt=(n,d=2)=>Number(n.toFixed(d)).toString();
 export const cutName=v=>v==='normal'?'垂直斜边切口':'竖直切口';
 export function calculate(input){
@@ -39,15 +40,15 @@ export function calculate(input){
 }
 export function toDXF(model,selected=null){
  const lines=[];const put=(...v)=>lines.push(...v.map(String));
- put(999,'REVIEW REQUIRED - mm - NO KERF / NO BENDS - '+VERSION,0,'SECTION',2,'HEADER',9,'$ACADVER',1,'AC1015',9,'$INSUNITS',70,4,9,'$MEASUREMENT',70,1,0,'ENDSEC',0,'SECTION',2,'TABLES',0,'TABLE',2,'LAYER',70,1,0,'LAYER',2,'CUT',70,0,62,7,6,'CONTINUOUS',0,'ENDTAB',0,'ENDSEC',0,'SECTION',2,'ENTITIES');
- let offset=0;
+ put(999,'REVIEW REQUIRED - mm - NO KERF / NO BENDS - '+VERSION);
+ let offset=0,maxHeight=0,handle=0x1000;
  for(const part of selected?[model.parts.find(x=>x.id===selected)]:model.parts){
   if(!part)throw Error('找不到分段');
-  put(999,part.id+' thickness='+fmt(model.params.thickness,6)+'mm bbox='+fmt(part.width,6)+'x'+fmt(part.height,6),0,'LWPOLYLINE',100,'AcDbEntity',8,'CUT',100,'AcDbPolyline',90,4,70,1,38,0);
+  put(999,part.id+' thickness='+fmt(model.params.thickness,6)+'mm bbox='+fmt(part.width,6)+'x'+fmt(part.height,6),0,'LWPOLYLINE',5,(handle++).toString(16).toUpperCase(),330,MODELSPACE_OWNER,100,'AcDbEntity',8,'CUT',100,'AcDbPolyline',90,4,70,1,38,0);
   for(const [x,y] of part.points)put(10,fmt(x+offset,6),20,fmt(y,6));
-  offset+=part.width+100;
+  offset+=part.width+100;maxHeight=Math.max(maxHeight,part.height);
  }
- put(0,'ENDSEC',0,'EOF');return lines.join('\r\n')+'\r\n';
+ return wrapDXF(lines.join('\r\n')+'\r\n',offset-100,maxHeight);
 }
 // Conservative local parser. Explicit labels + units only; no inferred values or geometry.
 export function parseText(text){
