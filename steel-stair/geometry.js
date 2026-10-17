@@ -1,5 +1,5 @@
 import {wrapDXF,MODELSPACE_OWNER} from './dxf-template.js';
-export const VERSION='1.0.1';
+export const VERSION='1.1.0';
 export const fmt=(n,d=2)=>Number(n.toFixed(d)).toString();
 export const cutName=v=>v==='normal'?'垂直斜边切口':'竖直切口';
 export function calculate(input){
