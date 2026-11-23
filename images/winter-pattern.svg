@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="360" viewBox="0 0 360 360" fill="none" stroke="#8c9b9a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+<defs>
+<g id="flake"><path d="M0-18V18M-15.6-9l31.2 18M-15.6 9l31.2-18M-5-13l5 5 5-5M-5 13l5-5 5 5M-14-2l7-2-2-7M14 2l-7 2 2 7M-9 11l2-7-7-2M9-11l-2 7 7 2"/></g>
+<g id="star"><path d="M0-6V6M-6 0H6M-3.5-3.5l7 7M-3.5 3.5l7-7"/></g>
+<g id="crystal"><path d="M0-11 7 0 0 11-7 0Z"/></g>
+</defs>
+<use href="#flake" transform="translate(28 27) rotate(12)"/><use href="#flake" transform="translate(212 58) rotate(38) scale(.8)"/><use href="#flake" transform="translate(113 164) rotate(-13) scale(1.1)"/><use href="#flake" transform="translate(301 227) rotate(9)"/><use href="#flake" transform="translate(48 303) rotate(34) scale(.75)"/><use href="#flake" transform="translate(226 331) rotate(5) scale(.9)"/>
+<use href="#star" transform="translate(123 40)"/><use href="#star" transform="translate(314 97) scale(.6)"/><use href="#star" transform="translate(33 200) scale(.8)"/><use href="#star" transform="translate(211 233)"/><use href="#star" transform="translate(143 310) scale(.7)"/>
+<use href="#crystal" transform="translate(280 26) rotate(30) scale(.6)"/><use href="#crystal" transform="translate(47 113) rotate(-16) scale(.5)"/><use href="#crystal" transform="translate(235 156) rotate(25) scale(.75)"/><use href="#crystal" transform="translate(139 249) rotate(-16) scale(.5)"/><use href="#crystal" transform="translate(338 321) rotate(25) scale(.6)"/>
+<g stroke-width="2.2"><path d="M170 100h.1M335 160h.1M74 244h.1M180 347h.1M350 42h.1M7 345h.1"/></g>
+</svg>

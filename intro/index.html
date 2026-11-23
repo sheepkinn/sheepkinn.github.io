@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>SHEEPKINN / Entrance</title>
+    <link rel="preload" href="ArchivoBlack.ttf" as="font" type="font/ttf" crossorigin />
+    <style>
+      @font-face {
+        font-family: Archivo;
+        src: url("ArchivoBlack.ttf") format("truetype");
+        font-weight: 900;
+        font-display: block;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        overflow: hidden;
+        background: #22211f;
+        color: #eeebe3;
+      }
+      #stage,
+      canvas,
+      #loader {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+      canvas {
+        display: block;
+      }
+      #hero,
+      #editor,
+      #error,
+      [hidden] {
+        display: none !important;
+      }
+      #loader {
+        display: grid;
+        place-items: center;
+        background: #22211f;
+        pointer-events: none;
+      }
+      #loader span {
+        font:
+          900 16px/1.3 Archivo,
+          Arial;
+        letter-spacing: 4px;
+        text-align: center;
+      }
+      #loader i {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 2px;
+        background: #eeebe3;
+        animation: load 0.9s ease forwards;
+      }
+      @keyframes load {
+        from {
+          width: 0;
+        }
+        to {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main id="stage" aria-label="文字隧道动画预览">
+      <section id="hero">
+        <p>Independent type experiment / 001</p>
+        <h1 id="headline">SHEEPKINN</h1>
+        <div class="bottom">
+          <span>把你的文字，变成一个空间。<br />EDIT THE WORDS. KEEP THE MOTION.</span>
+          <p>TYPE / SPACE / MOTION</p>
+        </div>
+      </section>
+      <canvas id="tunnel" aria-label="透视文字隧道"></canvas>
+      <div id="loader">
+        <span>SHEEPKINN<br />JOURNAL</span><i></i>
+      </div>
+    </main>
+    <aside id="editor" hidden>
+      <button class="close" id="close" aria-label="关闭编辑器">×</button>
+      <h2>TYPE TUNNEL / 文字编辑</h2>
+      <label for="mainText">第一组文字</label
+      ><input id="mainText" type="text" maxlength="48" value="BUILT TO BE" autocomplete="off" />
+      <label for="sideText">第二组文字</label
+      ><input id="sideText" type="text" maxlength="32" value="BOLD" autocomplete="off" />
+      <label for="font">字体</label
+      ><select id="font">
+        <option value="Archivo">Archivo Black · 接近原版的粗黑字形</option>
+        <option value="InterTight">Inter Tight · 更紧凑的无衬线</option>
+      </select>
+      <label for="weight">字重 <output id="weightValue">900</output></label
+      ><input id="weight" type="range" min="400" max="900" step="50" value="900" />
+      <label for="speed">播放速度 <output id="speedValue">1.0×</output></label
+      ><input id="speed" type="range" min="0.5" max="2" step="0.1" value="1" />
+      <div class="row">
+        <button id="apply">应用并重播</button><button id="copy">复制当前链接</button>
+      </div>
+      <p class="note">
+        较长文字沿画面长边排列；竖屏时隧道旋转
+        90°，长文字显示在左右。支持英文字母、数字和符号；中文使用系统字体。Archivo Black
+        为固定字重，Inter Tight 支持字重调整。Esc 关闭面板，空格暂停。
+      </p>
+    </aside>
+    <div hidden>
+      <button id="edit"></button><button id="replay"></button><button id="pause"></button>
+    </div>
+    <div id="error" role="alert" hidden>当前浏览器无法启用 WebGL。请开启硬件加速后重试。</div>
+    <script src="tunnel.js"></script>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+BestTen-CRT / ベストテンFONT
+Author: FLOP DESIGN
+Copyright(c) 2021 M+ FONTS PROJECT
+
+Author's distribution and terms:
+https://booth.pm/ja/items/2747965
+https://flopdesign.booth.pm/items/2747965
+
+The author permits commercial and non-commercial use and embedding in programs.
+This font derives from M+ BITMAP FONTS / PixelMplus10; see the author's terms.
+This is the unmodified WOFF2 font used for the contact heading in the reference.
+Webfont source: https://framerusercontent.com/assets/bnCWZPY7w0OK55F5jIzdxQLWRwI.woff2

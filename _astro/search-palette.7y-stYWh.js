@@ -1,0 +1,14 @@
+var e=null;function t(e){return e.toLocaleLowerCase().trim()}function n(){let e=document.getElementById(`search-palette-data`);if(!e?.textContent)return[];try{let t=JSON.parse(e.textContent);return Array.isArray(t)?t:[]}catch{return[]}}function r(e,n){if(!n)return 1;let r=t(e.title),i=t(e.category),a=t(e.description),o=`${r} ${i} ${a}`;return r===n?100:r.startsWith(n)?80:r.includes(n)?60:i.includes(n)?40:a.includes(n)?20:n.split(/\s+/).every(e=>o.includes(e))?10:0}function i(e){return e.replace(/[&<>"']/g,e=>({"&":`&amp;`,"<":`&lt;`,">":`&gt;`,'"':`&quot;`,"'":`&#39;`})[e])}function a(a=document){let o=a.querySelector(`[data-search-palette]`);if(!(o instanceof HTMLDialogElement)||o.dataset.ready===`true`)return;o.dataset.ready=`true`;let s=o.querySelector(`[data-search-palette-input]`),c=o.querySelector(`[data-search-palette-results]`),l=o.querySelector(`[data-search-palette-close]`);if(!(s instanceof HTMLInputElement)||!(c instanceof HTMLElement))return;let u=n(),d=0,f=[],p=()=>{c.querySelectorAll(`[data-search-palette-item]`).forEach(e=>{e.classList.toggle(`is-active`,Number(e.dataset.index||0)===d)})},m=()=>{let e=t(s.value);f=u.map(t=>({item:t,score:r(t,e)})).filter(({score:e})=>e>0).sort((e,t)=>t.score-e.score).slice(0,6).map(({item:e})=>e),d=Math.min(d,Math.max(f.length-1,0)),f.length===0?c.innerHTML=`<p class="search-palette-empty">没有匹配的文章。</p>`:c.innerHTML=f.map((e,t)=>`
+          <a
+            class="search-palette-item${t===d?` is-active`:``}"
+            href="${i(e.href)}"
+            data-search-palette-item
+            data-index="${t}"
+          >
+            <span class="search-palette-item-main">
+              <span class="search-palette-item-title">${i(e.title)}</span>
+              <span class="search-palette-item-desc">${i(e.description)}</span>
+            </span>
+            <span class="search-palette-item-meta">${i(e.category)}</span>
+          </a>
+        `).join(``)},h=()=>{o.open||(o.showModal(),s.value=``,d=0,m()),requestAnimationFrame(()=>s.focus())},g=()=>{o.open&&o.close()};document.addEventListener(`keydown`,e=>{let t=e.target,n=t instanceof HTMLElement&&(t.tagName===`INPUT`||t.tagName===`TEXTAREA`||t.isContentEditable);!o.open||n&&t!==s||(e.key===`Escape`?g():e.key===`ArrowDown`&&t===s?(e.preventDefault(),d=Math.min(d+1,f.length-1),m()):e.key===`ArrowUp`&&t===s?(e.preventDefault(),d=Math.max(d-1,0),m()):e.key===`Enter`&&t===s&&f[d]&&(e.preventDefault(),window.location.href=f[d].href))}),s.addEventListener(`input`,()=>{d=0,m()}),l?.addEventListener(`click`,()=>{g()}),c.addEventListener(`mouseover`,e=>{let t=e.target.closest(`[data-search-palette-item]`);t&&(d=Number(t.dataset.index||0),p())}),o.addEventListener(`cancel`,()=>{g()}),o.addEventListener(`click`,e=>{e.target===o&&g()}),e={open:h,close:g}}function o(){e?.open()}export{a as mountSearchPalette,o as openSearchPalette};
